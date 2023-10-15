@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="board02Mapper">
+
+	<resultMap id="board02ResultSet" type="board02">
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="BORAD_TITLE" property="boardTitle" />
+		<result column="BORAD_DESC" property="boardDesc" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="STATUS" property="status" />
+		<result column="USER_NO" property="userNo" />
+		<result column="CATEGORY" property="category" />
+	</resultMap>
+
+</mapper>
