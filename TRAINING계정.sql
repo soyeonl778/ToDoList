@@ -1,8 +1,10 @@
 DROP TABLE MEMBER;
 DROP TABLE BOARD;
+DROP TABLE TODO;
 
 DROP SEQUENCE SEQ_MEMBER;  
 DROP SEQUENCE SEQ_BOARD;  
+DROP SEQUENCE SEQ_TODO;
 
 --------------------------------------------------
 ----------------    회원 테이블    -----------------
@@ -56,9 +58,21 @@ COMMENT ON COLUMN BOARD.CATEGORY IS '카테고리';
 
 
 --------------------------------------------------
+------------   ToDo 리스트 테이블    --------------
+--------------------------------------------------
+CREATE TABLE TODO (
+    TODO_NO NUMBER PRIMARY KEY,
+    TODO_DESC VARCHAR2(2000) NOT NULL,
+    TODO_DATE DATE NOT NULL,
+    STATUS VARCHAR2(1) DEFAULT 'Y' CHECK (STATUS IN('Y', 'N'))
+);
+
+
+--------------------------------------------------
 ----------------    시퀀스    ---------------------
 --------------------------------------------------
 CREATE SEQUENCE SEQ_MEMBER NOCACHE;
 CREATE SEQUENCE SEQ_BOARD NOCACHE;
+CREATE SEQUENCE SEQ_TODO NOCACHE;
 
 COMMIT;
