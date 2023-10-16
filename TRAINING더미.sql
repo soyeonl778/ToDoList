@@ -83,3 +83,42 @@ SEQ_MEMBER.NEXTVAL,
 'Y',
 '2023/10/01'
 );
+
+--------------------------------------------------
+----------------    TODO 더미    -----------------
+--------------------------------------------------
+INSERT INTO TODO
+VALUES(
+SEQ_TODO.NEXTVAL,
+'첫번째 할일입니다',
+'2023/10/16'
+);
+
+INSERT INTO TODO
+VALUES(
+SEQ_TODO.NEXTVAL,
+'두번째 할일입니다',
+'2023/10/16'
+);
+
+INSERT INTO TODO
+VALUES(
+SEQ_TODO.NEXTVAL,
+'세번째 할일입니다',
+'2023/10/16'
+);
+
+COMMIT;
+
+SELECT * 
+FROM TODO
+WHERE TODO_DATE = '2023-10-16'
+GROUP BY TODO_DATE;
+
+INSERT INTO TODO
+VALUES(
+SEQ_TODO.NEXTVAL,
+'추가되라얍',
+SYSDATE
+);
+ROLLBACK;
