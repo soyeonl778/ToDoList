@@ -46,43 +46,40 @@ SEQ_MEMBER.NEXTVAL,
 --------------------------------------------------
 ----------------    게시글 더미    -----------------
 --------------------------------------------------
-INSERT INTO MEMBER
+INSERT INTO BOARD
 VALUES(
 SEQ_BOARD.NEXTVAL,
-'게시글1번',
+'게시글 1번',
 '1번 게시글입니다.',
 SYSDATE,
 'Y',
-'2023/10/01'
+1,
+1
 );
 
-INSERT INTO MEMBER
+INSERT INTO BOARD
 VALUES(
-SEQ_MEMBER.NEXTVAL,
-'user02',
-'1234',
-'이소연',
-'소연12',
-'01012345678',
-'so@yeon.com',
-'제주도 서귀포시 돌하르방',
+SEQ_BOARD.NEXTVAL,
+'게시글2번',
+'2번 게시글입니다.',
+SYSDATE,
 'Y',
-'2023/10/01'
+2,
+1
 );
 
-INSERT INTO MEMBER
+INSERT INTO BOARD
 VALUES(
-SEQ_MEMBER.NEXTVAL,
-'user02',
-'1234',
-'이소연',
-'소연12',
-'01012345678',
-'so@yeon.com',
-'제주도 서귀포시 돌하르방',
+SEQ_BOARD.NEXTVAL,
+'게시글3번',
+'3번 게시글입니다.',
+SYSDATE,
 'Y',
-'2023/10/01'
+3,
+1
 );
+
+
 
 --------------------------------------------------
 ----------------    TODO 더미    -----------------
@@ -91,34 +88,24 @@ INSERT INTO TODO
 VALUES(
 SEQ_TODO.NEXTVAL,
 '첫번째 할일입니다',
-'2023/10/16'
+'2023/10/16',
+'Y'
 );
 
 INSERT INTO TODO
 VALUES(
 SEQ_TODO.NEXTVAL,
 '두번째 할일입니다',
-'2023/10/16'
+'2023/10/16',
+'Y'
 );
 
 INSERT INTO TODO
 VALUES(
 SEQ_TODO.NEXTVAL,
 '세번째 할일입니다',
-'2023/10/16'
+'2023/10/16',
+'Y'
 );
 
 COMMIT;
-
-SELECT * 
-FROM TODO
-WHERE TODO_DATE = '2023-10-16'
-GROUP BY TODO_DATE;
-
-INSERT INTO TODO
-VALUES(
-SEQ_TODO.NEXTVAL,
-'추가되라얍',
-SYSDATE
-);
-ROLLBACK;
