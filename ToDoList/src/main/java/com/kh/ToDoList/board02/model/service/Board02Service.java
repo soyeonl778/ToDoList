@@ -12,4 +12,8 @@ public interface Board02Service {
 
 	int deleteList(int hiddenNo);
 
+	int deleteDayList(String date);
+
+	int deleteAllDay();
+
 }

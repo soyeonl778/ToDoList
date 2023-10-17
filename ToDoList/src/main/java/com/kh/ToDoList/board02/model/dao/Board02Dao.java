@@ -29,4 +29,12 @@ public class Board02Dao {
 		return sqlSession.update("todoList02Mapper.deleteList", hiddenNo);
 	}
 
+	public int deleteDayList(SqlSessionTemplate sqlSession, String date) {
+		return sqlSession.update("todoList02Mapper.deleteDayList", date);
+	}
+
+	public int deleteAllDay(SqlSessionTemplate sqlSession) {
+		return sqlSession.update("todoList02Mapper.deleteAllDay");
+	}
+
 }

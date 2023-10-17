@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<jsp:forward page="WEB-INF/views/board/calendar_todolist.jsp" />
+	<jsp:forward page="WEB-INF/views/board02/todoList02.jsp" />
 
 </body>
 </html>

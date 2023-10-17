@@ -32,5 +32,15 @@ public class Board02ServiceImpl implements Board02Service {
 	public int deleteList(int hiddenNo) {
 		return board02Dao.deleteList(sqlSession, hiddenNo);
 	}
+
+	@Override
+	public int deleteDayList(String date) {
+		return board02Dao.deleteDayList(sqlSession, date);
+	}
+
+	@Override
+	public int deleteAllDay() {
+		return board02Dao.deleteAllDay(sqlSession);
+	}
 	
 }
