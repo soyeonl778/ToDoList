@@ -32,5 +32,16 @@
 	   SET STATUS = 'N'
 	 WHERE TODO_NO = #{hiddenNo}
 	</update>
+	
+	<update id="deleteDayList">
+	UPDATE TODO
+	   SET STATUS = 'N'
+	 WHERE TODO_DATE = #{date}  
+	</update>
+	
+	<update id="deleteAllDay">
+	UPDATE TODO
+	   SET STATUS = 'N'
+	</update>
 
 </mapper>

@@ -71,4 +71,32 @@ public class Board02Controller {
 		}
 	};
 	
+	/**
+	 * 하루 일정 삭제
+	 * @param date
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="deleteDayList")
+	public int deleteDayList(String date) {
+		
+		int result = board02Service.deleteDayList(date);
+		
+		return result;
+		
+	}
+	
+	/**
+	 * 잔체 일정 초기화
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="deleteAllDay")
+	public int deleteAllDay() {
+		
+		int result = board02Service.deleteAllDay();
+		
+		return result;
+	}
+	
 }

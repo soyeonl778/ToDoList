@@ -375,9 +375,21 @@ $(document).ready(function() {
 	reset.addEventListener('click',() => {
 		let result = prompt("정말 초기화 할까요?(y/n)");
 		let YMD = year + '-' + mon + '-' + DayOfChoice;
+		
 	    if(result === 'y'){
-	        localStorage.removeItem(YMD);
-	        displayToDoOnDays();
+	    	$.ajax({
+	    		url: "deleteDayList",
+	    		method: "GET",
+	    		data: {date: YMD},
+	    		success: function(res) {
+	    			if(res > 0) {
+	    				displayToDoOnDays();
+	    			}
+	    		},
+	    		error: function(e) {
+	    			console.log(e);
+	    		}
+	    	});
 	    }
 	});
 	
@@ -386,8 +398,19 @@ $(document).ready(function() {
 		let result = prompt("전체 리스트를 초기화 하시겠어요?(y/n)");
 	    
 	    if(result==='y'){
-	        localStorage.clear();
-	        displayToDoOnDays();
+	        
+	    	$.ajax({
+	    		url: "deleteAllDay",
+	    		method: "GET",
+	    		success: function(res) {
+	    			if(res > 0) {
+	    				displayToDoOnDays();
+	    			}
+	    		},
+	    		error: function(e) {
+	    			console.log(e)
+	    		}
+	    	});
 	    }
 	});
 	
