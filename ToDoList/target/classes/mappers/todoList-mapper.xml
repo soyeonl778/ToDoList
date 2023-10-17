@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="todoListMapper">
+
+	<resultMap id="todoListResult" type="todolist">
+	<result column="TODO_NO" property="todoNo"/>
+	<result column="TODO_DESC" property="todoDesc"/>
+	<result column="TODO_DATE" property="todoDate"/>
+	<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	<select id="selectDoList" resultMap="todoListResult">	
+		SELECT *
+		FROM TODO
+		WHERE TODO_DATE = #{date}
+		AND STATUS = 'Y'
+	</select>
+	
+	<insert id="insertToDoList">
+		INSERT INTO TODO
+		VALUES(SEQ_TODO.NEXTVAL,
+       			#{task},
+       			#{date},
+       			'Y')
+	</insert>
+	
+	<update id="deleteListDay">
+		UPDATE TODO
+		SET STATUS = 'N'
+		WHERE TODO_DATE = #{date}
+	</update>
+	
+	<update id="deleteOneList">
+		UPDATE TODO
+		SET STATUS = 'N'
+		WHERE TODO_NO = #{hiddenNo}
+	</update>
+
+	<update id="deleteAllDayList">
+		UPDATE TODO
+		SET STATUS = 'N'
+	</update>
+</mapper>

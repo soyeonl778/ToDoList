@@ -10,10 +10,12 @@
 	<typeAliases>
 		<typeAlias type="com.kh.ToDoList.board02.model.vo.Board02" alias="board02" />
 		<typeAlias type="com.kh.ToDoList.board02.model.vo.TodoList02" alias="todoList02" />
+		<typeAlias type="com.kh.ToDoList.board.model.vo.todolist" alias="todolist" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/board02-mapper.xml" />
 		<mapper resource="mappers/todoList02-mapper.xml" />
+		<mapper resource="mappers/todoList-mapper.xml" />
 	</mappers>
 </configuration>
