@@ -1,14 +1,20 @@
 package com.kh.ToDoList.board02.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.ToDoList.board02.model.service.Board02Service;
+import com.kh.ToDoList.board02.model.vo.Board02;
 import com.kh.ToDoList.board02.model.vo.TodoList02;
 
 @Controller
@@ -96,5 +102,36 @@ public class Board02Controller {
 		
 		return result;
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="selectBoardList", method=RequestMethod.GET, produces="application/json")
+	public Map<String, Object> selectBoardList(@RequestParam(value="page", defaultValue="1") int page) {
+		
+		int pageSize = 10;
+		
+		List<Board02> list = board02Service.selectBoardList(page, pageSize);
+		
+		int totalPosts = board02Service.selectTotalCount();
+		
+		int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("list", list);
+		result.put("currentPage", page);
+		result.put("totalPages", totalPages);
+		
+		System.out.println("목록 : " + list);
+		System.out.println("전체게시글 수 : " + totalPosts);
+		System.out.println("전체 페이지 수 : " + totalPages);
+		System.out.println("반환할 결과 값 : " + result);
+		System.out.println("페이지 : " + page);
+		
+		return result;
+		
+	}
+	
+	
+	
 	
 }

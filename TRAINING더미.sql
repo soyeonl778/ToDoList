@@ -49,7 +49,7 @@ SEQ_MEMBER.NEXTVAL,
 INSERT INTO BOARD
 VALUES(
 SEQ_BOARD.NEXTVAL,
-'게시글 1번',
+'게시글1번',
 '1번 게시글입니다.',
 SYSDATE,
 'Y',
@@ -79,6 +79,137 @@ SYSDATE,
 1
 );
 
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글4번',
+'4번 게시글입니다.',
+SYSDATE,
+'Y',
+1,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글5번',
+'5번 게시글입니다.',
+SYSDATE,
+'Y',
+2,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글6번',
+'6번 게시글입니다.',
+SYSDATE,
+'Y',
+3,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글7번',
+'7번 게시글입니다.',
+SYSDATE,
+'Y',
+1,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글8번',
+'8번 게시글입니다.',
+SYSDATE,
+'Y',
+2,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글9번',
+'9번 게시글입니다.',
+SYSDATE,
+'Y',
+3,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글10번',
+'10번 게시글입니다.',
+SYSDATE,
+'Y',
+1,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글11번',
+'11번 게시글입니다.',
+SYSDATE,
+'Y',
+2,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글12번',
+'12번 게시글입니다.',
+SYSDATE,
+'Y',
+3,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글13번',
+'13번 게시글입니다.',
+SYSDATE,
+'Y',
+1,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글14번',
+'14번 게시글입니다.',
+SYSDATE,
+'Y',
+2,
+1
+);
+
+INSERT INTO BOARD
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'게시글15번',
+'15번 게시글입니다.',
+SYSDATE,
+'Y',
+3,
+1
+);
 
 
 --------------------------------------------------

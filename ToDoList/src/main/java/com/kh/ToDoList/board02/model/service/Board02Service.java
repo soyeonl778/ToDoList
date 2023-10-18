@@ -1,7 +1,9 @@
 package com.kh.ToDoList.board02.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.kh.ToDoList.board02.model.vo.Board02;
 import com.kh.ToDoList.board02.model.vo.TodoList02;
 
 public interface Board02Service {
@@ -15,5 +17,9 @@ public interface Board02Service {
 	int deleteDayList(String date);
 
 	int deleteAllDay();
+
+	List<Board02> selectBoardList(int page, int pageSize);
+
+	int selectTotalCount();
 
 }

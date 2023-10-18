@@ -27,7 +27,7 @@
 	<div class="nav-wrapper">
 		<div class="nav pagewidth">
 			<ul>	
-				<li class="selected"><a href="#">Board</a></li>
+				<li class="selected"><a href="javascript:void(0);">Board</a></li>
 			</ul>
 		</div>
 	</div>
@@ -47,38 +47,11 @@
 					</thead>
 					
 					<tbody class="table-group-divider tBody">
-						<tr>
-							<th scope="row">1</th>
-							<td>안녕하세요.</td>
-							<td>존윅</td>
-							<td>09/09/29</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>안녕하세요.</td>
-							<td>존윅</td>
-							<td>09/09/29</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>안녕하세요.</td>
-							<td>짐캐리</td>
-							<td>09/09/29</td>
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>안녕하세요.</td>
-							<td>미스터윅</td>
-							<td>09/09/29</td>
-						</tr>
-						<tr>
-							<th scope="row">5</th>
-							<td>안녕하세요.</td>
-							<td>톰하디</td>
-							<td>09/09/29</td>
-						</tr>
+
 					</tbody>
 				</table>
+				
+				<div class="pagination"></div>
 			</div>
 			
 			
@@ -105,7 +78,62 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>
 
+function changePage(newPage) {
+	page = newPage;
+	pagination();
+}
+
+let page = 1;
+
+function pagination() {
+	
+	$.ajax({
+		url: "selectBoardList?page=" + page,
+		method: "GET",
+		dataType: "json",
+		success: function(res) {
+			
+			let textArea = document.querySelector('.tBody');
+			let contents = "";
+			let currentPage = res.currentPage;
+			let totalpage = res.totalPages;
+			let paginationArea = document.querySelector('.pagination');
+			let paginationBtn = "";
+			
+			if(res.list.length > 0) {
+				
+				for(let i = 0; i < res.list.length; i++) {
+					contents += "<tr>";
+					contents += 	"<th scope='row'>" + res.list[i].rownum + "</th>";
+					contents += 	"<td>" + res.list[i].boardDesc + "</td>";
+					contents += 	"<td>" + res.list[i].userName + "</td>";
+					contents += 	"<td>" + res.list[i].createDate + "</td>";
+					contents += "</tr>";
+				}
+				
+				textArea.innerHTML = contents;
+				
+				for(let i = 1; i <= totalpage; i++) {
+					
+					if(i === currentPage) {
+						paginationBtn += "<button class='btn btn-dark' disabled>" + i + "</button>";
+					} else {
+						paginationBtn += "<button class='btn btn-outline-dark' onclick='changePage(" + i + ")'>" + i + "</button>";
+					}
+				}
+				
+				paginationArea.innerHTML = paginationBtn;
+			}
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	})
+};
+
 $(document).ready(function() {
+	
+
 	
 	$('#boardArea').on('click', '.table>tbody>tr', function() {
 		
@@ -113,12 +141,11 @@ $(document).ready(function() {
 		
 	});
 	
-	
-	
+	pagination();
 	
 });
 
-
 </script>
+
 </body>
 </html>

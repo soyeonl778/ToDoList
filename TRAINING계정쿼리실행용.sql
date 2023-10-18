@@ -29,3 +29,40 @@ FROM TODO;
 
 SELECT *
 FROM TODO;
+
+UPDATE BOARD
+SET BOARD_TITLE = '게시글1번입니다'
+WHERE BOARD_NO = 1;
+
+
+
+SELECT *
+  FROM (
+        SELECT ROWNUM R, A.*
+          FROM (
+                SELECT B.*, USER_NAME
+                  FROM BOARD B
+                  JOIN MEMBER M ON B.USER_NO = M.USER_NO) A
+         WHERE ROWNUM <= (SELECT COUNT(*) FROM BOARD)  
+                )
+ WHERE R >= 1 AND R <= 10
+   AND STATUS = 'Y';
+
+
+SELECT b.*, USER_NAME
+FROM BOARD b
+JOIN MEMBER M ON B.USER_NO = M.USER_NO;
+
+
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM R, A.*
+		          FROM (
+		      	        SELECT B.*, USER_NAME 
+		                  FROM BOARD B
+		                  JOIN MEMBER M ON B.USER_NO = M.USER_NO 
+		                ) A
+		         WHERE ROWNUM <= (SELECT COUNT(*) FROM BOARD)  
+		        )
+		 WHERE R >= 1 AND R <= 10
+		   AND STATUS = 'Y';

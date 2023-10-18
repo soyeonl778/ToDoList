@@ -4,12 +4,37 @@
 
 	<resultMap id="board02ResultSet" type="board02">
 		<result column="BOARD_NO" property="boardNo" />
-		<result column="BORAD_TITLE" property="boardTitle" />
-		<result column="BORAD_DESC" property="boardDesc" />
+		<result column="BOARD_TITLE" property="boardTitle" />
+		<result column="BOARD_DESC" property="boardDesc" />
 		<result column="CREATE_DATE" property="createDate" />
 		<result column="STATUS" property="status" />
 		<result column="USER_NO" property="userNo" />
 		<result column="CATEGORY" property="category" />
+		<result column="R" property="rownum" />
+		<result column="USER_NAME" property="userName" />
 	</resultMap>
 
+
+	<select id="selectBoardList" parameterType="map" resultMap="board02ResultSet">
+	<![CDATA[
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM R, A.*
+		          FROM (
+		      	        SELECT B.*, USER_NAME 
+		                  FROM BOARD B
+		                  JOIN MEMBER M ON B.USER_NO = M.USER_NO 
+		                ) A
+		         WHERE ROWNUM <= (SELECT COUNT(*) FROM BOARD)  
+		        )
+		 WHERE R >= #{start} AND R <= #{end}
+		   AND STATUS = 'Y'
+    ]]>
+	</select>
+
+
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM BOARD
+	</select>
 </mapper>

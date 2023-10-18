@@ -16,5 +16,7 @@ public class Board02 {
 	private String status;		// STATUS	CHAR(1 BYTE)
 	private int userNo;			// USER_NO	NUMBER
 	private int category;		// CATEGORY	NUMBER
+	private int rownum;
+	private String userName;
 
 }
