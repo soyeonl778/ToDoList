@@ -28,8 +28,6 @@ public class Board02Controller {
 		
 		ArrayList<TodoList02> list = board02Service.selectList(date);
 		
-		System.out.println(list);
-		
 		return new Gson().toJson(list);
 	};
 	
