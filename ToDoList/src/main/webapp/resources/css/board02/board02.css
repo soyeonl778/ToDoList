@@ -1,6 +1,5 @@
-@charset "UTF-8";
-
 @CHARSET "UTF-8";
+
 * {
 	margin:0;
 	padding:0;
@@ -293,4 +292,17 @@ form.searchform {
 
 .sidebar {
 	border: 1px solid black;
+}
+
+.tHead {
+	text-align: center;
+}
+
+.tBody {
+	text-align: center;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
 }
