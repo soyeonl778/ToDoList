@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.ToDoList.board.model.service.BoardService;
+import com.kh.ToDoList.board.model.vo.PageInfo;
 import com.kh.ToDoList.board.model.vo.todolist;
 
 @Controller
@@ -16,6 +19,8 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	// ***** TODOLIST 영역 *****
 	
 	//일정 조회
 	@ResponseBody
@@ -40,10 +45,7 @@ public class BoardController {
 		} else {
 			return 0;
 		}
-		
-		
 	}
-	
 	
 	// 하루일정삭제
 	@ResponseBody
@@ -55,6 +57,7 @@ public class BoardController {
 		return result;
 	}
 
+	// 한줄만 삭제
 	@ResponseBody
 	@RequestMapping(value="deleteOneList")
 	public int deleteOneList(int hiddenNo) {
@@ -64,12 +67,32 @@ public class BoardController {
 		return result;
 	}
 	
+	// 모든날의 일정삭제
 	@ResponseBody
 	@RequestMapping(value="deleteAllDayList")
 	public int deleteAllDayList() {
 		
 		int result = boardService.deleteAllDayList();
 		return result;
+	}
+	
+	
+	// ***** BOARD 영역 *****
+	
+	@RequestMapping("list.bo")
+	public ModelAndView selectListView(
+			@RequestParam(value="cPage", defaultValue="1") int currentPage,
+			ModelAndView mv) {
+		
+		int listCount = boardService.selectListView();
+		
+		int pageLimit = 10;
+		int boardLimit = 5;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, pageLimit, boardLimit, currentPage);
+		
+				return mv;
+		
 	}
 	
 	
