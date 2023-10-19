@@ -231,7 +231,7 @@ div.content ul li {
 
 /* sidebar */
 div.sidebar {
-	padding-left:20px;
+	padding: 15px;
 	float:left;
 	width:30%;
 	font-family:Georgia, "Times New Roman", Times, serif;
@@ -305,4 +305,94 @@ form.searchform {
 .pagination {
 	display: flex;
 	justify-content: center;
+}
+
+.openSideWrap{
+	height: 100%;
+}
+
+.sidebarSubTitle>p {
+	margin-bottom: 0!important;
+}
+
+.btnWrap {
+	display: flex;
+	justify-content: flex-end;
+    margin-bottom: 10px;
+}
+.sidebarTitle {
+	display: flex;
+    justify-content: center;
+}
+
+.boardTitleArea {
+	width: 95%;
+    margin: 5px;
+    padding: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.boardTitleArea:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.sidebarDesc {
+	display: flex;
+    justify-content: center;
+}
+
+.sidebarSubTitle {
+	display: flex;
+	width: 95%;
+	margin: 15px 25px 30px;
+	justify-content: space-between;
+}
+
+.dateInput {
+	width: 30%;
+    border: none;
+}
+
+.nameInput {
+	width: 65%;
+    border: none;
+    border-bottom: 1px solid black;
+    padding-left: 5px;
+}
+
+.nameInput:focus {
+	border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.sidebarContent {
+	display: flex;
+    justify-content: center;
+    height: 50%;
+}
+
+.boardTextArea {
+	resize: none;
+}
+
+.sidebarForm {
+	height: 100%;
+}
+
+.boardTextArea {
+	height: 100%;
+	width: 90%;
+}
+
+.boardTextArea:focus {
+	border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.boardSubmitBtn {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
 }
