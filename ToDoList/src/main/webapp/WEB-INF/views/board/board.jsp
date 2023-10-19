@@ -7,6 +7,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<!-- 제이쿼리 CDN-->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- 부트스트랩 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
 <!-- css -->
 <link rel="stylesheet" href="/resources/css/board/board.css">
 <title>게시판</title>
@@ -14,70 +20,74 @@
 <body>
 	<div class="header-wrapper">
 		<div class="header pagewidth">
-			<!-- TITLE -->
-			<h1>게시판 예제</h1>
-			<h2>무료 제공 템플릿을 활용한 게시판 디자인</h2>
-			<!-- END TITLE -->
+			<h1>게 시 판</h1>
+			<h2>여기는 소연이 공간</h2>
 		</div>
 	</div>
 	<div class="nav-wrapper">
 		<div class="nav pagewidth">
 			<ul>	
-				<!-- MENU -->
-				<li class="selected"><a href="board.html">Board</a></li>
-				<!-- END MENU -->
+				<li class="selected"><a href="#">Board</a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="pagewidth">
 		<div class="page-wrap">
-			<div class="content">
-			
+			<div id="boardArea" class="content">
 				<!-- CONTENT -->
-				<h3>게시판</h3>
-				<table>
-				<tr>
-				<th>글번호</th><th>글제목</th><th>날짜</th>
-				</tr>
-				<tr>
-				<td>1</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>2</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>3</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>4</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>5</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>6</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>7</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>8</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>9</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
-				<tr>
-				<td>10</td><td>안녕하세요.</td><td>09/09/29</td>
-				</tr>
+				<h3>게시 목록</h3>
+				<table class="table table-hover">
+					<thead class="table-light tHead">
+						<tr class="theadTr">
+							<th scope="col">글번호</th>
+							<th scope="col">글제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">날짜</th>
+						</tr>
+					</thead>
+					
+					<tbody class="table-group-divider tBody">
+						<tr>
+							<th scope="row">1</th>
+							<td>안녕하세요.</td>
+							<td>존윅</td>
+							<td>09/09/29</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>안녕하세요.</td>
+							<td>존윅</td>
+							<td>09/09/29</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>안녕하세요.</td>
+							<td>짐캐리</td>
+							<td>09/09/29</td>
+						</tr>
+						<tr>
+							<th scope="row">4</th>
+							<td>안녕하세요.</td>
+							<td>미스터윅</td>
+							<td>09/09/29</td>
+						</tr>
+						<tr>
+							<th scope="row">5</th>
+							<td>안녕하세요.</td>
+							<td>톰하디</td>
+							<td>09/09/29</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
-		<div class="sidebar">	
-				
-				<!-- SIDEBAR -->	
-				
-				
-				<!-- SIDEBAR -->
-		
+			
+			
+			<div class="sidebar" style="display: none;">	
+				<div class="openSideWrap">
+					<div class="sideOpen">
+						상세 정보 노출 영역입니다.
+					</div>
+				</div>	
 			</div>
 		
 			<div class="clear"></div>		
@@ -87,9 +97,28 @@
 		</div>
 	</div>
 	<div style="font-size: 0.8em; text-align: center;">
-	<br />
-	Design downloaded from Zeroweb.org: <a href="http://www.zeroweb.org">Free website templates, layouts, and tools.</a><br />
-	<br />
+		<br />
+		Design downloaded from Zeroweb.org: <a href="http://www.zeroweb.org">Free website templates, layouts, and tools.</a><br />
+		<br />
 	</div>
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script>
+
+$(document).ready(function() {
+	
+	$('#boardArea').on('click', '.table>tbody>tr', function() {
+		
+		$('.sidebar').show();
+		
+	});
+	
+	
+	
+	
+});
+
+
+</script>
 </body>
 </html>
