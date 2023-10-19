@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="today" value="<%= new java.util.Date() %>" />
+<c:set var="nowDate">
+	<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />
+</c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +41,12 @@
 		<div class="page-wrap">
 			<div id="boardArea" class="content">
 				<!-- CONTENT -->
-				<h3>게시 목록</h3>
+				<div class="titleContainer">
+					<h3>게시 목록</h3>
+					<div class="btnWrap">
+						<button type="button" class="btn btn-outline-success" onclick="newBoardWrite();">새 글작성</button>
+					</div>
+				</div>
 				<table class="table table-hover">
 					<thead class="table-light tHead">
 						<tr class="theadTr">
@@ -56,11 +67,29 @@
 			
 			
 			<div class="sidebar" style="display: none;">	
-				<div class="openSideWrap">
-					<div class="sideOpen">
-						상세 정보 노출 영역입니다.
-					</div>
-				</div>	
+				<form class="sidebarForm" action="insertPost" method="post">
+					<div class="openSideWrap" style="border: 1px solid red;">
+					
+						<div class="sidebarTitle">
+							<input class="boardTitleArea" type="text" name="titleInput" placeholder="제목을 입력해주세요.">
+						</div>
+						
+						<div class="sidebarDesc">
+							<div class="sidebarSubTitle">
+								<input class="dateInput" type="text" value="${ nowDate }" name="dateInput" readonly>
+								<input class="nameInput" type="text" value="" name="nameInput" placeholder="이름을 입력해주세요">
+							</div>
+						</div>
+						
+						<div class="sidebarContent">
+							<textarea class="boardTextArea" rows="1" name="descTextArea">본문내용이 입력될 부분</textarea>
+						</div>
+						
+						<div class="boardSubmitBtn">
+							<button type="submit" class="btn btn-outline-success">작성완료</button>
+						</div>
+					</div>	
+				</form>
 			</div>
 		
 			<div class="clear"></div>		
@@ -103,11 +132,25 @@ function pagination() {
 			if(res.list.length > 0) {
 				
 				for(let i = 0; i < res.list.length; i++) {
+					
+					let originalDate = new Date(res.list[i].createDate);
+					
+					let options = {
+							year: 'numeric',
+							month: '2-digit',
+							day: '2-digit',
+							hour: '2-digit',
+							minute: '2-digit',
+							hour12: true
+					};
+					
+					let formmattedDate = originalDate.toLocaleString('ko-KR', options);					
+					
 					contents += "<tr>";
 					contents += 	"<th scope='row'>" + res.list[i].rownum + "</th>";
 					contents += 	"<td>" + res.list[i].boardDesc + "</td>";
 					contents += 	"<td>" + res.list[i].userName + "</td>";
-					contents += 	"<td>" + res.list[i].createDate + "</td>";
+					contents += 	"<td>" + formmattedDate + "</td>";
 					contents += "</tr>";
 				}
 				
@@ -131,13 +174,20 @@ function pagination() {
 	})
 };
 
+
+function newBoardWrite() {
+
+	$('.sidebar').show();
+	
+}
+
 $(document).ready(function() {
 	
 
 	
 	$('#boardArea').on('click', '.table>tbody>tr', function() {
 		
-		$('.sidebar').show();
+			$('.sidebar').toggle();
 		
 	});
 	

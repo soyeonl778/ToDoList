@@ -120,13 +120,7 @@ public class Board02Controller {
 		result.put("list", list);
 		result.put("currentPage", page);
 		result.put("totalPages", totalPages);
-		
-		System.out.println("목록 : " + list);
-		System.out.println("전체게시글 수 : " + totalPosts);
-		System.out.println("전체 페이지 수 : " + totalPages);
-		System.out.println("반환할 결과 값 : " + result);
-		System.out.println("페이지 : " + page);
-		
+
 		return result;
 		
 	}
