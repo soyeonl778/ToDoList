@@ -44,7 +44,7 @@
 				<div class="titleContainer">
 					<h3>게시 목록</h3>
 					<div class="btnWrap">
-						<button type="button" class="btn btn-outline-success" onclick="newBoardWrite();">새 글작성</button>
+						<button type="button" class="btn btn-outline-success" onclick="newBoardWrite();">새 글 작성</button>
 					</div>
 				</div>
 				<table class="table table-hover">
@@ -67,11 +67,13 @@
 			
 			
 			<div class="sidebar" style="display: none;">	
-				<form class="sidebarForm" action="insertPost" method="post">
-					<div class="openSideWrap" style="border: 1px solid red;">
+				<div class="closeBtn">✖️</div>
+				<form class="sidebarForm">
+					<div class="openSideWrap">
 					
 						<div class="sidebarTitle">
 							<input class="boardTitleArea" type="text" name="titleInput" placeholder="제목을 입력해주세요.">
+							<input class="hiddenBoardNo" type="text" style="display: none;" value="">
 						</div>
 						
 						<div class="sidebarDesc">
@@ -82,11 +84,15 @@
 						</div>
 						
 						<div class="sidebarContent">
-							<textarea class="boardTextArea" rows="1" name="descTextArea">본문내용이 입력될 부분</textarea>
+							<textarea class="boardTextArea" rows="1" name="descTextArea"></textarea>
 						</div>
 						
 						<div class="boardSubmitBtn">
-							<button type="submit" class="btn btn-outline-success">작성완료</button>
+							<button type="button" class="btn btn-outline-success insertPost" onclick="insertPost()">작성완료</button>
+							<button type="button" class="btn btn-outline-info changeForm" style="display: none;" onclick="changeForm()">수정</button>
+							<button type="button" class="btn btn-outline-danger deletePost" style="display: none;" onclick="deletePost()">삭제</button>
+							<button type="button" class="btn btn-outline-primary confirmUpdate" style="display: none;" onclick="confirmUpdate()">수정완료</button>
+							<button type="button" class="btn btn-outline-secondary goBack" style="display: none;" onclick="goBack()">뒤로가기</button>
 						</div>
 					</div>	
 				</form>
@@ -107,13 +113,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>
 
+let page = 1;
+
+// 다른 페이지 눌렀을 때 새로운 리스트 조회
 function changePage(newPage) {
 	page = newPage;
 	pagination();
-}
+};
 
-let page = 1;
-
+// 전체 리스트 조회 및 페이지네이션 처리
 function pagination() {
 	
 	$.ajax({
@@ -148,9 +156,10 @@ function pagination() {
 					
 					contents += "<tr>";
 					contents += 	"<th scope='row'>" + res.list[i].rownum + "</th>";
-					contents += 	"<td>" + res.list[i].boardDesc + "</td>";
+					contents += 	"<td>" + res.list[i].boardTitle + "</td>";
 					contents += 	"<td>" + res.list[i].userName + "</td>";
 					contents += 	"<td>" + formmattedDate + "</td>";
+					contents += 	"<td class='hiddenNo' style='display: none;'>" + res.list[i].boardNo + "</td>";
 					contents += "</tr>";
 				}
 				
@@ -174,22 +183,161 @@ function pagination() {
 	})
 };
 
-
+// 작성버튼 클릭 시 사이드바 활성화
 function newBoardWrite() {
 
-	$('.sidebar').show();
+	if($('.sidebar').css('display') == 'block') {
+		location.reload();
+		$('.sidebar').toggle();
+	} else {
+		$('.nameInput').css("border-bottom", "1px solid black");
+		$('.sidebar').toggle();
+	}
+	
+};
+
+// 새 글 작성
+function insertPost() {
+	
+	let formData = $('.sidebarForm').serialize();
+	
+	$.ajax({
+		url: "insertPost",
+		method: "post",
+		data: formData,
+		success: function(res) {
+			if(res > 0) {
+				location.reload();
+			}
+		},
+		error: function(e) {
+			console.log("error", e);
+		}
+	})
+};
+
+// 선택한 게시글 상세조회
+function sendSelectAction(hiddenNo) {
+    $.ajax({
+        url: "selectBoardOne",
+        type: "get",
+        dataType: "json",
+        data: { hiddenNo: hiddenNo },
+        success: function (res) {
+            $('.boardTitleArea').val(res.boardTitle);
+            $('.nameInput').val(res.userName);
+            $('.boardTextArea').val(res.boardDesc);
+            $('.hiddenBoardNo').val(res.boardNo);
+            $('.boardTitleArea').attr('readonly', 'readonly');
+            $('.nameInput').attr('readonly', 'readonly');
+            $('.boardTextArea').attr('readonly', 'readonly');
+            $('.insertPost').hide();
+            $('.confirmUpdate').hide();
+            $('.goBack').hide();
+            $('.changeForm').show();
+            $('.deletePost').show();
+            $('.sidebar').show();
+            $('.nameInput').css("border-bottom", "unset");
+        },
+        error: function (e) {
+            console.log("err", e);
+        }
+    });
+};
+
+// 클릭한 게시글 고유 번호 추출
+$('#boardArea').on('click', '.table>tbody>tr', function () {
+    let hiddenNo = $(this).find('.hiddenNo').text();
+
+    if ($('.sidebar').css('display') == 'none') {
+    	sendSelectAction(hiddenNo);
+    } else {
+    	sendSelectAction(hiddenNo);
+    }
+});
+
+
+// 뒤로가기 이벤트
+function goBack() {
+	
+	let hiddenBoardNo = $('.hiddenBoardNo').val();
+	
+	sendSelectAction(hiddenBoardNo);
+};
+
+
+// 수정버튼 클릭 시 폼 양식 변경
+function changeForm() {
+	
+	$('.boardTitleArea').removeAttr('readonly');
+	$('.boardTextArea').removeAttr('readonly');
+	$('.boardTitleArea').focus();
+	
+	$('.confirmUpdate').show();
+	$('.goBack').show();
+	$('.changeForm').hide();
+	$('.deletePost').hide();
+};
+
+// 게시글 수정
+function confirmUpdate() {
+	
+	let boardTitle = $('.boardTitleArea').val();
+	let boardDescription = $('.boardTextArea').val();
+	let boardHiddenNo = $('.hiddenBoardNo').val();
+
+	$.ajax({
+		url: "confirmUpdate",
+		type: "post",
+		data: {
+			boardTitle: boardTitle,
+			boardDesc: boardDescription,
+			boardNo: boardHiddenNo
+		},
+		success: function(res) {
+			if(res > 0) {
+				location.reload();
+			};
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
+};
+
+
+// 게시글 삭제
+function deletePost() {
+	
+	let boardHiddenNo = $('.hiddenBoardNo').val();
+	
+	$.ajax({
+		url: "deletePost",
+		method: "get",
+		data: {boardNo: boardHiddenNo},
+		success: function(res) {
+			if(res > 0) {
+				location.reload();
+				pagination();
+			}
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
 	
 }
 
-$(document).ready(function() {
-	
 
+// 딛힘 버튼
+$('.closeBtn').on('click', function() {
 	
-	$('#boardArea').on('click', '.table>tbody>tr', function() {
-		
-			$('.sidebar').toggle();
-		
-	});
+	$('.sidebar').hide();
+	location.reload();
+});
+
+// 초기 화면 렌더링
+$(document).ready(function() {
 	
 	pagination();
 	

@@ -24,6 +24,8 @@
 		      	        SELECT B.*, USER_NAME 
 		                  FROM BOARD B
 		                  JOIN MEMBER M ON B.USER_NO = M.USER_NO 
+		                 WHERE B.STATUS = 'Y' 
+		                 ORDER BY BOARD_NO DESC
 		                ) A
 		         WHERE ROWNUM <= (SELECT COUNT(*) FROM BOARD)  
 		        )
@@ -37,4 +39,46 @@
 		SELECT COUNT(*)
 		  FROM BOARD
 	</select>
+	
+	
+	<insert id="insertPost">
+		INSERT INTO BOARD
+		VALUES(SEQ_BOARD.NEXTVAL,
+	       	   #{titleInput},
+		       #{descTextArea},
+		       SYSDATE,
+		       'Y',
+		   <choose>
+		     <when test="nameInput == '관리자'">1</when>    	
+		     <when test="nameInput == '조승호'">2</when>    	
+		     <when test="nameInput == '이소연'">3</when> 
+		     <otherwise>20</otherwise>   	
+		   </choose>
+		       ,
+		       1)
+	</insert>
+	
+	
+	<select id="selectBoardOne" parameterType="_int" resultMap="board02ResultSet">
+		SELECT B.*, USER_NAME 
+		  FROM BOARD B
+		  JOIN MEMBER M ON B.USER_NO = M.USER_NO
+		 WHERE B.BOARD_NO = #{hiddenNo}
+	</select>
+	
+	
+	<insert id="confirmUpdate">
+		UPDATE BOARD
+		   SET BOARD_TITLE = #{boardTitle},
+		       BOARD_DESC = #{boardDesc}
+		 WHERE BOARD_NO = #{boardNo}      
+	</insert>
+	
+	
+	<update id="deletePost">
+		UPDATE BOARD
+		   SET STATUS = 'N'
+		 WHERE BOARD_NO = #{boardNo}  
+	</update>
+	
 </mapper>

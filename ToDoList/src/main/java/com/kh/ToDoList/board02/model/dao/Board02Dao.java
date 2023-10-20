@@ -49,4 +49,27 @@ public class Board02Dao {
 		return sqlSession.selectOne("board02Mapper.selectTotalCount");
 	}
 
+	public int insertPost(SqlSessionTemplate sqlSession, String titleInput, String nameInput, String descTextArea) {
+		
+		Map<String, Object> parameter = new HashMap<>();
+		
+		parameter.put("titleInput", titleInput);
+		parameter.put("nameInput", nameInput);
+		parameter.put("descTextArea", descTextArea);
+		
+		return sqlSession.insert("board02Mapper.insertPost", parameter);
+	}
+
+	public Board02 selectBoardOne(SqlSessionTemplate sqlSession, int hiddenNo) {
+		return sqlSession.selectOne("board02Mapper.selectBoardOne", hiddenNo);
+	}
+
+	public int confirmUpdate(SqlSessionTemplate sqlSession, Map<String, Object> parameter) {
+		return sqlSession.insert("board02Mapper.confirmUpdate", parameter);
+	}
+
+	public int deletePost(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("board02Mapper.deletePost", boardNo);
+	}
+
 }
