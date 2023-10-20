@@ -101,12 +101,12 @@
 			<div class="clear"></div>		
 		</div>
 		<div class="footer">
-			<p><a href="http://validator.w3.org/check/referer" title="valid XHTML">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer" title="valid CSS">CSS</a> &nbsp;&nbsp; &copy; YourWebsiteName. Design: <a href="http://www.spyka.net">spyka webmaster</a> | <a href="http://www.justfreetemplates.com">Free Web Templates</a></p> 
+			<p>&nbsp;&nbsp; &copy; Design: Made by Seungho JO | Contact : <a href="https://github.com/jo-seungho">GitHub</a></p> 
 		</div>
 	</div>
 	<div style="font-size: 0.8em; text-align: center;">
 		<br />
-		Design downloaded from Zeroweb.org: <a href="http://www.zeroweb.org">Free website templates, layouts, and tools.</a><br />
+		Code is my paint, the web is my canvas.<br />
 		<br />
 	</div>
 <!-- 부트스트랩 -->
@@ -318,7 +318,6 @@ function deletePost() {
 		success: function(res) {
 			if(res > 0) {
 				location.reload();
-				pagination();
 			}
 		},
 		error: function(e) {

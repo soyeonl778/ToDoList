@@ -187,6 +187,11 @@ public class Board02Controller {
 	}
 	
 	
+	/**
+	 * 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("deletePost")
 	public int deletePost(int boardNo) {
