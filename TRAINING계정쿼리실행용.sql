@@ -45,7 +45,7 @@ SELECT *
                   JOIN MEMBER M ON B.USER_NO = M.USER_NO) A
          WHERE ROWNUM <= (SELECT COUNT(*) FROM BOARD)  
                 )
- WHERE R >= 1 AND R <= 10
+ WHERE R >= 1 AND R <= 100
    AND STATUS = 'Y';
 
 
@@ -61,8 +61,30 @@ JOIN MEMBER M ON B.USER_NO = M.USER_NO;
 		      	        SELECT B.*, USER_NAME 
 		                  FROM BOARD B
 		                  JOIN MEMBER M ON B.USER_NO = M.USER_NO 
+                          ORDER BY BOARD_NO DESC
 		                ) A
 		         WHERE ROWNUM <= (SELECT COUNT(*) FROM BOARD)  
 		        )
 		 WHERE R >= 1 AND R <= 10
 		   AND STATUS = 'Y';
+         
+         
+INSERT INTO MEMBER
+VALUES(
+SEQ_BOARD.NEXTVAL,
+'익명',
+'pass555',
+'익명',
+'John Doe',
+01012341234,
+'test@tt.com',
+'nowhere',
+'Y',
+SYSDATE
+);
+
+
+SELECT B.*, USER_NAME 
+FROM BOARD B
+JOIN MEMBER M ON B.USER_NO = M.USER_NO
+WHERE B.BOARD_NO = 1;

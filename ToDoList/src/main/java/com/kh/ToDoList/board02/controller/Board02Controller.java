@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,7 +104,11 @@ public class Board02Controller {
 		return result;
 	}
 	
-	
+	/**
+	 * 전체 게시글 조회 및 페이지네이션 처리
+	 * @param page
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="selectBoardList", method=RequestMethod.GET, produces="application/json")
 	public Map<String, Object> selectBoardList(@RequestParam(value="page", defaultValue="1") int page) {
@@ -125,7 +130,70 @@ public class Board02Controller {
 		
 	}
 	
+	/**
+	 * 새 글 추가
+	 * @param titleInput
+	 * @param nameInput
+	 * @param descTextArea
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="insertPost")
+	public int insertPost(@RequestParam(value="titleInput") String titleInput,
+						  @RequestParam String nameInput,
+						  @RequestParam String descTextArea) {
+		
+		int result = board02Service.insertPost(titleInput, nameInput, descTextArea);
+		
+		return result;
+	}
 	
 	
+	/**
+	 * 게시글 상세 조회
+	 * @param hiddenNo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("selectBoardOne")
+	public String selectBoardOne(int hiddenNo) {
+
+		Board02 list = board02Service.selectBoardOne(hiddenNo);
+		
+		return new Gson().toJson(list);
+		
+	}
+	
+	
+	/**
+	 * 게시글 수정
+	 * @param boardTitle
+	 * @param boardDesc
+	 * @param boardNo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("confirmUpdate")
+	public int confirmUpdate(String boardTitle, String boardDesc, int boardNo) {
+		
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("boardTitle", boardTitle);
+		parameter.put("boardDesc", boardDesc);
+		parameter.put("boardNo", boardNo);
+		
+		int result = board02Service.confirmUpdate(parameter);
+		
+		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("deletePost")
+	public int deletePost(int boardNo) {
+		
+		int result = board02Service.deletePost(boardNo);
+		
+		return result;
+	}
 	
 }

@@ -231,7 +231,7 @@ div.content ul li {
 
 /* sidebar */
 div.sidebar {
-	padding: 15px;
+	padding: 10px;
 	float:left;
 	width:30%;
 	font-family:Georgia, "Times New Roman", Times, serif;
@@ -291,8 +291,11 @@ form.searchform {
 }
 
 .sidebar {
-	border: 1px solid black;
+    background: linear-gradient(to bottom right, #8eddf1, #a4f3a4);
+    border: 1px solid transparent;
+    min-height: 450px;
 }
+
 
 .tHead {
 	text-align: center;
@@ -350,14 +353,13 @@ form.searchform {
 }
 
 .dateInput {
-	width: 30%;
+	width: 35%;
     border: none;
 }
 
 .nameInput {
-	width: 65%;
+	width: 60%;
     border: none;
-    border-bottom: 1px solid black;
     padding-left: 5px;
 }
 
@@ -377,7 +379,8 @@ form.searchform {
 }
 
 .sidebarForm {
-	height: 100%;
+	background-color: white;
+	height: 90%;
 }
 
 .boardTextArea {
@@ -395,4 +398,13 @@ form.searchform {
     justify-content: center;
     align-items: center;
     margin-top: 5px;
+}
+
+.closeBtn{
+	text-align: end;
+	margin-bottom: 5px;
+}
+
+.closeBtn:hover{
+	cursor: pointer;
 }

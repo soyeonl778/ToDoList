@@ -63,5 +63,25 @@ public class Board02ServiceImpl implements Board02Service {
 	public int selectTotalCount() {
 		return board02Dao.selectTotalCount(sqlSession);
 	}
+
+	@Override
+	public int insertPost(String titleInput, String nameInput, String descTextArea) {
+		return board02Dao.insertPost(sqlSession, titleInput, nameInput, descTextArea);
+	}
+
+	@Override
+	public Board02 selectBoardOne(int hiddenNo) {
+		return board02Dao.selectBoardOne(sqlSession, hiddenNo);
+	}
+
+	@Override
+	public int confirmUpdate(Map<String, Object> parameter) {
+		return board02Dao.confirmUpdate(sqlSession, parameter);
+	}
+
+	@Override
+	public int deletePost(int boardNo) {
+		return board02Dao.deletePost(sqlSession, boardNo);
+	}
 	
 }
