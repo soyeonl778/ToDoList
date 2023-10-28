@@ -7,7 +7,9 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ToDoList.board.model.vo.Board;
 import com.kh.ToDoList.board.model.vo.todolist;
+import com.kh.ToDoList.common.model.vo.PageInfo;
 
 @Repository
 public class BoardDao {
@@ -36,6 +38,16 @@ public class BoardDao {
 		return sqlSession.update("todoListMapper.deleteAllDayList");
 	}
 
-	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.selectListCount");
+	}
+
+	public ArrayList<Board> selectListView(SqlSessionTemplate sqlSession, PageInfo pi) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectListView", pi);
+	}
+
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard", b);
+	}
 	
 }

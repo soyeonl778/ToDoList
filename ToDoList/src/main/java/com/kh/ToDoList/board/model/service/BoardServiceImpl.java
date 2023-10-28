@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ToDoList.board.model.dao.BoardDao;
+import com.kh.ToDoList.board.model.vo.Board;
 import com.kh.ToDoList.board.model.vo.todolist;
+import com.kh.ToDoList.common.model.vo.PageInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -41,6 +43,21 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int deleteAllDayList() {
 		return boardDao.deleteAllDayList(sqlSession);
+	}
+
+	@Override
+	public int selectListCount() {
+		return boardDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> selectListView(PageInfo pi) {
+		return boardDao.selectListView(sqlSession, pi);
+	}
+
+	@Override
+	public int insertBoard(Board b) {
+		return boardDao.insertBoard(sqlSession, b);
 	}
 
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+
+	<resultMap type="board" id="boardListResult">
+	<result column="BOARD_NO" property="boardNo"/>
+	<result column="BOARD_TITLE" property="boardTitle"/>
+	<result column="USER_NAME" property="userName"/>
+	<result column="BOARD_DESC" property="boardDesc"/>
+	<result column="CREATE_DATE" property="createDate"/>
+	<result column="STATUS" property="status"/>
+	<result column="USER_NO" property="userNo"/>
+	<result column="CATEGORY" property="category"/>
+	</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE STATUS='Y'
+	</select>
+	
+	<select id="selectListView" resultMap="boardListResult">
+		SELECT B.*, M.USER_NAME
+			FROM BOARD B
+			JOIN MEMBER M ON B.USER_NO = M.USER_NO
+			WHERE B.STATUS = 'Y'
+			ORDER BY B.BOARD_NO DESC
+	</select>
+	
+	<insert id="insertBoard">
+		INSERT INTO BOARD
+        VALUES(SEQ_BOARD.NEXTVAL,
+               #{boardTitle},
+               #{boardDesc},
+               SYSDATE,
+               'Y',
+               <choose>
+               	<when test="userName == '관리자'">1</when>
+               	<when test="userName == '조승호'">2</when>
+               	<otherwise>3</otherwise>
+               </choose>
+               ,
+               1)
+	</insert>
+	
+	
+
+</mapper>

@@ -15,7 +15,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
 <!-- css -->
-<link rel="stylesheet" href="/resources/css/board/board.css">
+<link rel="stylesheet" href="/resources/css/board/main.css">
 <title>게시판</title>
 </head>
 <body>
@@ -36,8 +36,11 @@
 		<div class="page-wrap">
 			<div id="boardArea" class="content">
 				<!-- CONTENT -->
-				<h3>게시 목록</h3>
-				<a class="btn btn-secondary" style="float:right;" href="enrollForm.bo">글쓰기</a>
+				<h3>TOP 5</h3>
+				
+				<br>
+				
+				<a href="list.bo" style="float : right;">더보기&raquo;</a>
 				<table class="table table-hover">
 					<thead class="table-light tHead">
 						<tr class="theadTr">
@@ -47,20 +50,11 @@
 							<th scope="col">날짜</th>
 						</tr>
 					</thead>
-					
-					<tbody class="table-group-divider tBody">
-						<c:forEach var="b" items="${ list }">
-						<tr>
-							<th scope="row">${ b.boardNo }</th>
-							<td>${ b.boardTitle }</td>
-							<td>${ b.userName }</td>
-							<td>${ b.boardDesc }</td>
-						</tr>
-						</c:forEach>
+					<tbody>
+						<!-- 조회수 가장 높은 상위 5개 게시글 조회 (ajax) -->
 					</tbody>
 				</table>
 			</div>
-			
 			
 			<div class="sidebar" style="display: none;">	
 				<div class="openSideWrap">
@@ -76,11 +70,7 @@
 			<p><a href="http://validator.w3.org/check/referer" title="valid XHTML">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer" title="valid CSS">CSS</a> &nbsp;&nbsp; &copy; YourWebsiteName. Design: <a href="http://www.spyka.net">spyka webmaster</a> | <a href="http://www.justfreetemplates.com">Free Web Templates</a></p> 
 		</div>
 	</div>
-	<div style="font-size: 0.8em; text-align: center;">
-		<br />
-		Design downloaded from Zeroweb.org: <a href="http://www.zeroweb.org">Free website templates, layouts, and tools.</a><br />
-		<br />
-	</div>
+	
 <!-- 부트스트랩 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>
@@ -94,6 +84,12 @@ $(document).ready(function() {
 	});
 });
 
+$(document).on("click", "#boardList>tbody>tr", function() {
+	location.href = "detail.bo.?bno=" + $(this).children().eq(0).text();	
+});
+
+
 </script>
+
 </body>
 </html>

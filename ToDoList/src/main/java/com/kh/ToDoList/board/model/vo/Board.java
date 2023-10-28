@@ -11,6 +11,7 @@ public class Board {
 	
 	private int boardNo;  // 글번호
 	private String boardTitle; // 글제목
+	private String userName; // 작성자
 	private String boardDesc; // 글내용
 	private String createDate; // 글쓴날짜
 	private String status;
