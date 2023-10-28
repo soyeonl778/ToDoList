@@ -11,11 +11,13 @@
 		<typeAlias type="com.kh.ToDoList.board02.model.vo.Board02" alias="board02" />
 		<typeAlias type="com.kh.ToDoList.board02.model.vo.TodoList02" alias="todoList02" />
 		<typeAlias type="com.kh.ToDoList.board.model.vo.todolist" alias="todolist" />
+		<typeAlias type="com.kh.ToDoList.board.model.vo.Board" alias="board" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/board02-mapper.xml" />
 		<mapper resource="mappers/todoList02-mapper.xml" />
 		<mapper resource="mappers/todoList-mapper.xml" />
+		<mapper resource="mappers/board-mapper.xml" />
 	</mappers>
 </configuration>
